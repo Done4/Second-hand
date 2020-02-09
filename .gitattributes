@@ -1,2 +1,3 @@
-*.python linguist-language=javascript
-*.flask linguist-language=javascript
+*.js linguist-language=Scala
+*.css linguist-language=Scala
+*.html linguist-language=Scala
