@@ -1,0 +1,8 @@
+
+#搜索本数
+PER_PAGE=15
+
+RECENT_BOOK_PER_PAGE = 60
+
+#显示几本 gift
+RECENT_BOOK_COUNT=30
