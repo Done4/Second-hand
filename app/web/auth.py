@@ -20,14 +20,7 @@ def register():
           user = User()
           user.set_attrs(form.data)
           db.session.add(user)
-
-        # token = user.generate_confirmation_token()
-        # send_email(user.email, 'Confirm Your Account',
-        #            'email/confirm', user=user, token=token)
         login_user(user, False)
-        #flash('一封激活邮件已发送至您的邮箱，请快完成验证', 'confirm')
-        # 由于发送的是ajax请求，所以redirect是无效的
-        # return render_template('index.html')
         return redirect(url_for('web.index'))
     return render_template('auth/register.html', form=form)
 
@@ -61,7 +54,6 @@ def forget_password_request():
                        'email/reset_password.html', user=user,
                        token=user.generate_token())
             flash('一封邮件已发送到邮箱' + account_email + '，请及时查收')
-            #return redirect(url_for('web.login'))
     return render_template('auth/forget_password_request.html')
 
 
@@ -98,38 +90,4 @@ def change_password():
 def logout():
     logout_user()
     return redirect(url_for('web.index'))
-
-@web.route('/register/confirm/<token>')
-def confirm(token):
-    pass
-    # if current_user.confirmed:
-    #     return redirect(url_for('main.index'))
-    # if current_user.confirm(token):
-    #     db.session.commit()
-    #     flash('You have confirmed your account. Thanks!')
-    # else:
-    #     flash('The confirmation link is invalid or has expired.')
-    # return redirect(url_for('main.index'))
-
-
-@web.route('/register/ajax', methods=['GET', 'POST'])
-def register_ajax():
-    # if request.method == 'GET':
-    #     return render_template('auth/register.html')
-    # else:
-    #     form = RegisterForm()
-    #     form.validate()
-    #     user = User(form.nickname.data,
-    #                 form.email.data, form.password.data)
-    #     db.session.add(user)
-    #     db.session.commit()
-    #     # token = user.generate_confirmation_token()
-    #     # send_email(user.email, 'Confirm Your Account',
-    #     #            'email/confirm', user=user, token=token)
-    #     login_user(user, False)
-    #     g.status = True
-    #     flash('一封激活邮件已发送至您的邮箱，请快完成验证', 'confirm')
-    #     # 由于发送的是ajax请求，所以redirect是无效的
-    #     return 'go to index'
-    pass
 

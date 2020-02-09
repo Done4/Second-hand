@@ -1,12 +1,10 @@
 from app.models.base import Base,db
-from app.models.drift import Drift
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app.libs.helper import is_isbn_or_key
-from app.libs.enums import PendingStatus
 
 from flask import current_app
-from sqlalchemy import Column,Integer,String,Boolean,Float
+from sqlalchemy import Column,Integer,String,Boolean
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -20,7 +18,6 @@ class User(UserMixin,Base):
     nickname = Column(String(24), nullable=False)
     phone_number = Column(String(18), unique=True)
     email = Column(String(50), unique=True, nullable=False)
-    confirmed = Column(Boolean, default=False)
     send_counter = Column(Integer, default=0)
     receive_counter = Column(Integer, default=0)
     gifts = relationship('Gift')
@@ -38,19 +35,6 @@ class User(UserMixin,Base):
         if not self._password:
             return False
         return check_password_hash(self._password, raw)
-
-    # def can_satisfied_wish(self, current_gift_id=None):
-    #     if current_gift_id:
-    #         gift = Gift.query.get(current_gift_id)
-    #         if gift.uid == self.id:
-    #             return False
-    #     if self.beans < 1:
-    #         return False
-    #     success_gifts = Drift.query.filter(Drift.pending == PendingStatus.Success,
-    #                                        Gift.uid == self.id).count()
-    #     success_receive = Drift.query.filter(Drift.pending == PendingStatus.Success,
-    #                                          Drift.requester_id == self.id).count()
-    #     return False if success_gifts <= success_receive - 2 else True
 
     def can_save_to_list(self, isbn):
         if is_isbn_or_key(isbn) != 'isbn':

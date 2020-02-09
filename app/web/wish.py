@@ -1,7 +1,7 @@
 from app.libs.email import send_email
 from app.models.gift import Gift
 from app.models.wish import Wish
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for
 from flask_login import login_required, current_user
 
 from . import web

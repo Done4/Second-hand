@@ -1,7 +1,7 @@
 
 from flask_login import login_required, current_user
 from . import web
-from flask import flash, redirect, url_for, render_template, request, current_app
+from flask import flash, redirect, url_for, render_template, request
 from app.models.gift import Gift
 from app.forms.book import DriftForm
 from app.models.base import db

@@ -17,17 +17,3 @@ class Book(Base):
     summary=Column(String(3000)) #简介
     image=Column(String(50))
 
-    # @property
-    # def author(self):
-    #     return self._author if not self._author else json.loads(self._author)
-    #
-    # @author.setter
-    # def author(self, value):
-    #     if not isinstance(value, str):
-    #         self._author = json.dumps(value, ensure_ascii=False)
-    #     else:
-    #         self._author = value
-    #
-    # @property
-    # def author_str(self):
-    #     return '' if not self._author else '、'.join(self.author)

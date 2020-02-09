@@ -1,7 +1,6 @@
 from sqlalchemy.exc import IntegrityError
-
 from app.view_models.trade import TradeInfo
-from flask import jsonify, request, json, render_template, flash, current_app
+from flask import  request, render_template, flash, current_app
 from flask_login import current_user
 from app.libs.helper import is_isbn_or_key
 from app.spider.rec_book import RecBook
@@ -11,7 +10,7 @@ from app.view_models.book import BookCollection, BookViewModel, BookViewModelSQL
 from app.models.base import db
 from app.models.gift import Gift
 from app.models.wish import Wish
-from ..models.book import Book
+from app.models.book import Book
 
 
 @web.route('/book/search')

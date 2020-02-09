@@ -1,6 +1,6 @@
 from . import web
 from flask_login import login_required, current_user
-from flask import render_template, flash, request, redirect, url_for, current_app
+from flask import render_template, flash, redirect, url_for
 from app.models.base import db
 from app.models.gift import Gift
 from app.spider.rec_book import RecBook
