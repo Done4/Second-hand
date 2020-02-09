@@ -1,0 +1,2 @@
+*.python linguist-language=javascript
+*.flask linguist-language=javascript
