@@ -1,4 +1,3 @@
-import json
 from sqlalchemy import Column, String
 from sqlalchemy import Integer
 from app.models.base import Base

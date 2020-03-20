@@ -18,9 +18,9 @@
     <div class="nav-self">
         <div style="padding-top: inherit" class="container">
             <form class="form-inline" action="{{ url_for('web.search') }}" method="get">
+                <img class="tit" src="{{url_for('static', filename='images/head-logo.png')}}" style="padding-left:100px"/>
                 <div class="flex-vertical-center-height">
                     <div class="col-md-2">
-                        <img src="{{url_for('static', filename='images/logo.ico')}}"/>
                     </div>
                     <div style="margin-left:30px;" class="col-md-8 input-group">
                         <input name="q" type="text" placeholder="ISBN、图书名称"
@@ -70,8 +70,8 @@
     <div class="container-height flex-vertical-center float-menu">
         {% if not current_user.is_authenticated %}
             <div style="float:right">
-                <a href="{{ url_for('web.login') }}">登录</a>
-                <a style="margin-left: 40px;" href="{{ url_for('web.register') }}">注册</a>
+                <strong><a href="{{ url_for('web.login') }}">登录</a></strong>
+                <strong><a style="margin-left: 40px;" href="{{ url_for('web.register') }}">注册</a></strong>
             </div>
         {% else %}
             <a href="{{ url_for('web.personal_center') }}">欢迎登录，{{ current_user.nickname }}</a>
@@ -96,6 +96,7 @@
     </div>
     {% block content %} {% endblock %}
 </div>
+<div style="height:258px"></div>
 <div id="footer" class="flex-hor-center">
     <span>© 2020-2022 recbook created by l</span>
     <span>Contact the developer:123123(tel)123@a.edu(email)</span>

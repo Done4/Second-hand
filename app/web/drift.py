@@ -121,7 +121,7 @@ def save_drift(drift_form,current_gift):
         drift.book_author=book.author
         drift.book_img=book.image
         drift.isbn=book.isbn
-
-        db.session.add(drift)
+        #测试
+        #db.session.add(drift)
         book_name=drift.book_title
     return book_name

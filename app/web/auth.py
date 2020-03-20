@@ -11,7 +11,6 @@ from app.models.base import db
 from app.libs.email import send_email
 
 
-
 @web.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)

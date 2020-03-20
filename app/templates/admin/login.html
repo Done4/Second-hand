@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="description" content="description of your site" />
+	<meta name="author" content="author of the site" />
+	<title>二手书平台后台管理登录页面</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/bootstrap.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/bootstrap-responsive.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/styles.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/toastr.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/fullcalendar.css') }}" />
+	<script src="{{ url_for('static', filename='back/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/bootstrap.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/jquery.knob.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/jquery.sparkline.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/toastr.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/jquery.tablesorter.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/jquery.peity.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/fullcalendar.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/gcal.js') }}"></script>
+	<script src="{{ url_for('static', filename='back/js/setup.js') }}"></script>
+</head>
+
+<body>
+	<div id="in-nav">
+		{% if form and form.errors %}
+            {% for key, error in form.errors.items() %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+		<div class="container">
+			<div class="row">
+
+				<div class="span12">
+					<h4>
+						二手书平台<strong>管理员登录</strong>
+					</h4>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="span6 offset2">
+				<div class="login">
+					<form style="margin-top: 100px;" class="form-horizontal" action="" method="post">
+						<div class="control-group">
+						</div>
+						<div class="control-group">
+							<label for="inputEmail" class="control-label">用户名 </label>
+							<div class="controls">
+								<input id="inputEmail" name="name" type="text" placeholder="请输入用户名" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label for="inputPassword" class="control-label">密码 </label>
+							<div class="controls">
+								<input id="inputPassword" name="password" type="password" placeholder="请输入密码" />
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<input type="submit" class="btn" value="登录">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

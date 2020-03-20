@@ -52,7 +52,7 @@ class RecBook:
         key = '%' + keyword + '%'
         result=Book.query.filter(Book.title.like(key))
         count=result.count()
-        if count > 0:
+        if count > 3:
             self.__fill_mysql(result,count)
             return 'mysql'
         else:

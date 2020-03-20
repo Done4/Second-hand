@@ -159,7 +159,7 @@ hr {
 .flex-vertical-center-height {
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 213px;
 }
 .flex-vertical {
   display: flex;
@@ -192,9 +192,8 @@ a:hover {
   text-decoration: none;
 }
 .nav-self {
-  background-color: #364653;
   width: 100%;
-  height: 60px;
+  height: 135px;
 }
 .slogan {
   color: #ffffff;
@@ -221,7 +220,7 @@ html {
 }
 body {
   font-size: 14px;
-  background-color: #F2F5F7;
+  background-color: #f6f6f6;
 }
 p {
   font-size: 14px;
@@ -237,7 +236,7 @@ p {
   height: 60px;
 }
 .float-menu a {
-  color: #FFFFFF;
+  color: #333;
   font-size: 14px;
 }
 .linking span {
@@ -270,4 +269,15 @@ p {
   border-radius: 0;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.form-inline {
+    position: relative;
+}
+
+.form-inline .tit {
+    position:absolute;
+    top: 10px;
+    left: 193px;
+    height :60px
 }

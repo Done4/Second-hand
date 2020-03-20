@@ -1,0 +1,91 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="page">
+	<div class="page-container">
+		<div class="container">
+			<div class="row">
+				<div class="span3">
+					<h4>后台管理</h4>
+					<div class="sidebar">
+						<ul class="col-nav span3">
+							<!-- 管理员管理  -->
+							<li><a href="#admin" data-toggle="collapse" class="accordion-toggle"> 管理员管理
+								</a></li>
+							<li id="admin" class="collapse">
+								<ul>
+									<li><a href="findAll.admin"> <i class="pull-right icon-signal"></i>管理员列表
+										</a>
+								</ul>
+							</li>
+							<!-- 用户管理  -->
+							<li><a href="#metrics" data-toggle="collapse" class="accordion-toggle"> 用户管理
+								</a></li>
+							<li id="metrics" class="collapse">
+								<ul>
+									<li><a href="findAll.user"> <i class="pull-right icon-signal"></i>用户列表
+										</a><a href="add_user.html"> <i class="pull-right icon-fire"></i>添加用户
+										</a></li>
+								</ul>
+							</li>
+							<!-- 类别管理  -->
+							<!-- <li><a href="#bookmarks" data-toggle="collapse" class="accordion-toggle">类别管理</a></li>
+							<li id="bookmarks" class="collapse">
+								<ul>
+									<li><a href="category_addroot.jsp"> <i class="pull-right icon-plane"></i>添加根类别
+										</a><a href="findAll.category"> <i class="pull-right icon-fire"></i>类别列表
+										</a></li>
+								</ul>
+							</li> -->
+
+							<!-- 商品管理  -->
+							<li><a href="#product" data-toggle="collapse" class="accordion-toggle">商品管理
+								</a></li>
+							<li id="product" class="collapse">
+								<ul>
+									<li>
+										<a href="findAll.product"> <i class="pull-right icon-cog"></i>商品列表
+										</a>
+										<!-- <a href="product_add.jsp"> <i
+													class="pull-right icon-fire"></i>添加商品
+											</a> -->
+										<a href="product_complexsearch.jsp"> <i class="pull-right icon-cog"></i>商品搜索（复杂）
+										</a>
+									</li>
+								</ul>
+							</li>
+							<!-- 订单管理  -->
+							<li><a href="#order" data-toggle="collapse" class="accordion-toggle"> 订单管理
+								</a></li>
+							<li id="order" class="collapse">
+								<ul>
+									<li><a href="orders.html"> <i class="pull-right icon-cog"></i>查看订单
+										</a> <a href="search_order_complex.html"> <i
+												class="pull-right icon-cog"></i>订单搜索（复杂）
+										</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='back/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.knob.js') }}"></script>
+<script src="{{ url_for('static', filename='back/http://d3js.org/d3.v3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.sparkline.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/toastr.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.tablesorter.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.peity.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/fullcalendar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/gcal.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/setup.js') }}"></script>
+{% endblock %}

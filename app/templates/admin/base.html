@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	{% block title %}
+	<title>后台管理</title>
+	{% endblock%}
+	{% block head %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/bootstrap.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/bootstrap-responsive.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/styles.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/toastr.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='back/css/fullcalendar.css') }}" />
+	{% endblock %}
+</head>
+
+<body>
+	{% block navbar %}
+	<div id="in-nav">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<ul class="pull-right">
+						<li><a href="{{ url_for('web.register') }}" target="_blank">前台用户注册</a></li>
+						<li><a href="{{ url_for('web.index') }}">前台首页</a></li>
+						<!-- <li><a href="regist.html">管理员注册</a></li> -->
+					</ul>
+					<h4>
+						<a id="logo" href="index.html"> 二手书平台后台<strong>管理</strong>
+						</a>
+					</h4>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="in-sub-nav">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<ul>
+						<li><a href="{{ url_for('web.backindex') }}" class="active"><i
+									class="batch home"></i><br />主页</a></li>
+						<li><span class="label label-important pull-right"></span><a
+								href="{{ url_for('web.backadmin') }}"><i class="batch stream"></i><br />管理员列表</a></li>
+						<li><a href="{{ url_for('web.backuser') }}"><i class="batch users"></i><br />用户列表</a></li>
+						<!-- <li><a href="findAll.category"><i class="batch forms"></i><br />类别列表</a></li> -->
+						<li><a href="{{ url_for('web.backproduct') }}"><i class="batch quill"></i><br />书籍列表</a></li>
+						<li><span class="label label-important pull-right"></span><a href="#orders.html"><i
+									class="batch plane"></i><br />订单列表</a></li>
+						<li><a href="#"><i class="batch calendar"></i><br />其它扩展功能</a></li>
+						<li><a href="#"><i class="batch settings"></i><br />系统设置</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+	{% block content %} {% endblock %}
+	{% block hezi %}
+	<div style="height:171px"></div>
+	{% endblock %}
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<p class="pull-right">版权所有&nbsp;&nbsp;&nbsp;可以翻版</p>
+					<p>&copy; Copyright 2020 baba</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+{% block scripts %}
+<script>
+	$SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+</script>
+{% endblock %}
+
+</html>

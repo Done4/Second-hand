@@ -1,0 +1,171 @@
+{% extends 'admin/base.html' %}
+{% block content%}
+<div class="page">
+	<div class="page-container">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<a href="#newUserModal" data-toggle="modal" class="btn pull-right">添加新书籍</a>
+					<h4 class="header">书籍列表</h4>
+					<form action="findByKeywords.product" method="post">
+						<input type="text" name="keywords" class="form-control" placeholder="请输入搜索关键字">&nbsp; <input
+							class="btn btn-info" type="submit" value="搜索" id="search">
+					</form>
+					<table class="table table-striped sortable">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>书名</th>
+								<th>作者</th>
+								<th>出版社</th>
+								<th>出版年</th>
+								<th>页数</th>
+								<th>图片</th>
+								<th>装帧</th>
+								<th>ISBN</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for p in products %}
+							<tr>
+								<td>{{p.id }}</td>
+								<td>{{p.name }}</td>
+								<td>{{p.author }}</td>
+								<td>{{p.publisher }}</td>
+								<td>{{p.pubdate }}</td>
+								<td>{{p.pages }}</td>
+								<td><img src="{{p.image }}" width="30px" /></td>
+								<td>${p.binding }</td>
+								<td>${p.isbn }</td>
+								<td>
+									<div class="btn-group">
+										<button class="btn">操作</button>
+										<button data-toggle="dropdown" class="btn dropdown-toggle">
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu">
+											<li><a href="findByIdToReser.product?id=${p.id }">修改</a>
+												<a href="javascript:;" onclick="deleteProduct(${p.id })">删除</a></li>
+										</ul>
+										<script type="text/javascript">
+											function deleteProduct(id) {
+												if (confirm("你確定要刪除麽")) {
+													if (confirm("你真的要刪除麽，刪了就沒了！"))
+														window.location.href = "delete.product?id=" + id;
+												}
+											}
+										</script>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div class="pagination pagination-centered">
+						<ul>
+							<li class="disabled"><a href="#">&laquo;</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&raquo;</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="newUserModal" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+				<h3>添加新书籍</h3>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+					<div class="control-group">
+						<label for="name" class="control-label">书名</label>
+						<div class="controls">
+							<input name="name" id="name" type="text" placeholder="请输入书名" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="author" class="control-label">作者</label>
+						<div class="controls">
+							<input name="author" id="author" type="text" placeholder="请输入作者名称" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="summary" class="control-label">内容简介</label>
+						<div class="controls">
+							<input name="summary" id="summary" type="text" placeholder="内容简介" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="publisher" class="control-label">出版社
+						</label>
+						<div class="controls">
+							<input name="publisher" id="publisher" type="text" placeholder="请输入出版社名称" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="pubdate" class="control-label">出版年</label>
+						<div class="controls">
+							<input name="pubdate" id="pubdate" type="text" placeholder="请输入出版年份" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="binding" class="control-label">装帧</label>
+						<div class="controls">
+							<input name="binding" id="binding" type="text" placeholder="请输入装帧" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="isbn" class="control-label">ISBN</label>
+						<div class="controls">
+							<input name="isbn" id="isbn" type="text" placeholder="请输入ISBN" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="pages" class="control-label">页数</label>
+						<div class="controls">
+							<input name="pages" id="pages" type="text" placeholder="请输入页数" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="price" class="control-label">价格</label>
+						<div class="controls">
+							<input name="price" id="price" type="text" placeholder="上市价格" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="img" class="control-label">商品图片
+						</label>
+						<div class="controls">
+							<input id="img" id="img" type="file" placeholder="书籍图片" name="file" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">关闭</a>
+						<input type="submit" class="btn btn-primary" value="添加书籍" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='back/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.knob.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.sparkline.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/toastr.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.tablesorter.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.peity.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/fullcalendar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/gcal.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/setup.js') }}"></script>
+{% endblock %}
