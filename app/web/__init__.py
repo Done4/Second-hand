@@ -1,4 +1,5 @@
 from flask import Blueprint,render_template
+
 #蓝图层
 web=Blueprint('web',__name__)
 
@@ -9,6 +10,7 @@ def not_found(e):
 @web.app_errorhandler(500)
 def not_conn(e):
     return render_template('500.html'),500
+
 
 #模块导入只能放下面
 from app.web import auth

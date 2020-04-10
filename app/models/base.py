@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 
 
 class SQLAlchemy(_SQLAlchemy):
+    #上下文管理 __enter__和__exit__ 前后自动执行特定代码 ， with 语句
     @contextmanager
     def auto_commit(self, throw=True):
         try:
@@ -17,13 +18,14 @@ class SQLAlchemy(_SQLAlchemy):
             if throw:
                 raise e
 
+#增加status 参数 验证
 class Query(BaseQuery):
     def filter_by(self, **kwargs):
         if 'status' not in kwargs.keys():
             kwargs['status'] = 1
         return super(Query, self).filter_by(**kwargs)
 
-
+#替换BaseQuery类
 db = SQLAlchemy(query_class=Query)
 
 class Base(db.Model):
@@ -50,6 +52,3 @@ class Base(db.Model):
         for key, value in attrs.items():
             if hasattr(self, key) and key != 'id':
                 setattr(self, key, value)
-class BaseNoCreateTime(db.Model):
-    __abstract__ = True
-    status = Column(SmallInteger, default=1)

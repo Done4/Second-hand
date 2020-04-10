@@ -57,7 +57,7 @@
                             <label class="sub-title-color" for="address" >书籍收件地址</label>
                             {#<p id="realaddr"><input type="checkbox" id="adds" name="adds" value="使用默认地址" onclick="ban(this)" />{{form.adds.data}}</p>#}
                     <textarea class="form-control" rows="3" id="address" name="address"
-                              placeholder="如，张三 北京市清华大学666室。请务必确保该地址能够收到书籍">{{ form.address.data | default('',true) }}</textarea>
+                              placeholder="如，山西省太原市太原工业学院。请务必确保该地址能够收到书籍">{{ form.address.data | default('',true) }}</textarea>
                             <label class="sub-title-color" for="message">对他 / 她
                                 说的话</label>
                         <textarea class="form-control" id="message" name="message"
@@ -89,7 +89,7 @@
                 return;
             obj.remove();
         }else{
-            var addr="<textarea class='form-control' rows='3' id='address' name='address' placeholder='如，张三 北京市清华大学666室。请务必确保该地址能够收到书籍'>"+{{ form.address.data | default('',true) }}
+            var addr="<textarea class='form-control' rows='3' id='address' name='address' placeholder='如，山西省太原市太原工业学院。请务必确保该地址能够收到书籍'>"+{{ form.address.data | default('',true) }}
                         +"</textarea>"
             $("#realaddr").after(addr)
         }

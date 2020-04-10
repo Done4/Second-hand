@@ -5,7 +5,6 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
-                    <!-- 	<a href="#newUserModal" data-toggle="modal" class="btn pull-right">添加用户</a> -->
                     <h4 class="header">用户列表</h4>
                     <button class="btn btn-primary" type="button" onclick="alldelete()">批量删除</button>
                     <table class="table table-striped sortable">
@@ -18,6 +17,10 @@
                                 <th>赠送数量</th>
                                 <th>获赠数量</th>
                                 <th>注册日期</th>
+                                <th>状态</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,14 +28,22 @@
                             <tr>
                                 <th><input type="checkbox" name="ck" value="{{user.id }}" /></th>
                                 <td id="userid">{{user.id }}</td>
-                                <td>{{user.nicename }}</td>
+                                <td>{{user.nickname }}</td>
                                 <td>{{user.email }}</td>
                                 <td>{{user.send_counter }}</td>
                                 <td>{{user.receive_counter }}
                                     <!-- <span class="label label-success">已发货</span> -->
                                 </td>
-                                <td>{{user.create_time }}</td>
-
+                                <td>{{user.create_time | default('',true) | time_filter }}</td>
+                                <td>
+                                    {% if user.status == 1 %}
+                                    正常
+                                    {% elif user.status == 99%}
+                                    封号
+                                    {% else %}
+                                    管理员注销
+                                    {% endif %}
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <button class="btn">操作</button>
@@ -40,21 +51,24 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="javascript:;" onclick="resetPassword(${user.id })">重置密碼</a>
-                                                <a href="javascript:;" onclick="deleteUser(${user.id })">删除</a>
+                                            <li><a href="javascript:;" onclick="deleteUser({{user.id}})">注销账号</a>
+                                                <a href="javascript:;" onclick="lockUser({{user.id}})">封号</a>
+                                                <a href="javascript:;" onclick="unlockUser({{user.id}})">解封</a>
                                             </li>
                                         </ul>
                                         <script type="text/javascript">
-                                            function deleteUser(id) {
-                                                if (confirm("你確定要刪除麽")) {
-                                                    if (confirm("你真的要刪除麽，刪了就沒了！"))
-                                                        window.location.href = "delete.user?id=" + id;
+                                            function deleteUser(uid) {
+                                                if (confirm("你確定要注销麽")) {
+                                                    window.location.href = "delete.user/" + uid;
+
                                                 }
                                             }
-                                            function resetPassword(id) {
-                                                if (confirm("你確定要修改密碼麽")) {
-                                                    window.location.href = "resetPassword.user?id=" + id;
-                                                }
+                                            function lockUser(uid) {
+                                                window.location.href = "lock.user/" + uid;
+                                            }
+
+                                            function unlockUser(uid) {
+                                                window.location.href = "unlock.user/" + uid;
                                             }
                                         </script>
                                     </div>
@@ -77,33 +91,50 @@
                 </div>
             </div>
         </div>
-        <div id="newUserModal" class="modal hide fade">
-            <div class="modal-header">
-                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                <h3>新建用户</h3>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" action="../pre/register.user" method="post" />
-                <div class="control-group">
-                    <label for="inputEmail" class="control-label">用户名</label>
-                    <div class="controls">
-                        <input id="inputEmail" type="text" placeholder="请输入用户名" />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label for="inputCurrentPassword" class="control-label">密码
-                    </label>
-                    <div class="controls">
-                        <input id="inputCurrentPassword" type="password" placeholder="请输入密码" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn">关闭</a><input type="submit" data-dismiss="modal"
-                        class="btn btn-primary" value="添加用户" />
-                </div>
-            </div>
-            </form>
-        </div>
+
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='back/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.knob.js') }}"></script>
+<script src="{{ url_for('static', filename='back/https://d3js.org/d3.v3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.sparkline.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/toastr.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.tablesorter.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/jquery.peity.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/fullcalendar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/gcal.js') }}"></script>
+<script src="{{ url_for('static', filename='back/js/setup.js') }}"></script>
+<script>
+
+    function alldelete() {
+        var f = false;
+        //得到要删除的主键id
+        var arr = [];//用于存要删除的选中的id值
+        var ck = document.getElementsByName("ck");//得到一组checkbox  相当于数组
+        //循环这一组checkbox让每一个checkbox选中
+
+        for (var i = 0; i < ck.length; i++) {
+            if (ck[i].checked == true) {//代表选中
+                arr.push(ck[i].value);
+                f = true;
+            }
+        }
+        //跳到删除的servlet里去
+        if (f == true) {
+            if (confirm("您确认要删除吗？")) {
+                for (let i in arr) {
+                    alert(arr[i]);
+                    window.location.href = "delete.user?id=" + arr[i];
+                }
+            }
+        } else {
+            alert("请至少选中一条进行批量删除");
+        }
+    }
+</script>
 {% endblock %}

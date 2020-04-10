@@ -36,7 +36,6 @@ class Wish(Base):
             Gift.isbn.in_(isbn_list),
             Gift.status == 1).group_by(
             Gift.isbn).all()
-        # count_list=[EachGiftWishCount(w[0],w[1]) for w in count_list]
         count_list = [{'count': w[0], 'isbn': w[1]} for w in count_list]
         return count_list
 

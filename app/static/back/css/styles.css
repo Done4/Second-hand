@@ -62,10 +62,10 @@ body {
         padding: 10px; }
 
 #in-sub-nav {
-  background-color: #333333;
+  background-color: #505E69;
   -moz-box-shadow: inset 0px 0px 10px #111111;
   -webkit-box-shadow: inset 0px 0px 10px #111111;
-  box-shadow: inset 0px 0px 10px #111111; }
+  box-shadow: inset 0px 0px 10px #fff; }
   #in-sub-nav ul {
     text-align: center;
     margin-bottom: 80px; }
@@ -613,3 +613,4 @@ ul.stat-list {
 /* ============== settings ============== */
 .settings-group {
   margin-top: 40px; }
+

@@ -18,25 +18,25 @@
 								<th>书名</th>
 								<th>作者</th>
 								<th>出版社</th>
-								<th>出版年</th>
+								<th>出版时间</th>
 								<th>页数</th>
 								<th>图片</th>
 								<th>装帧</th>
-								<th>ISBN</th>
+								<!-- <th>ISBN</th> -->
 							</tr>
 						</thead>
 						<tbody>
-							{% for p in products %}
+							{% for p in books %}
 							<tr>
 								<td>{{p.id }}</td>
-								<td>{{p.name }}</td>
-								<td>{{p.author }}</td>
+								<td>{{p.title | truncate(10, killwords=True, leeway=0)}}</td>
+								<td>{{p.author | truncate(10, killwords=True, leeway=0)}}</td>
 								<td>{{p.publisher }}</td>
 								<td>{{p.pubdate }}</td>
 								<td>{{p.pages }}</td>
-								<td><img src="{{p.image }}" width="30px" /></td>
-								<td>${p.binding }</td>
-								<td>${p.isbn }</td>
+								<!-- <td><img src="{{p.image }}" width="30px" /></td> -->
+								<td>{{p.binding |default("未知",true)}}</td>
+								<!-- <td>{{p.isbn }}</td> -->
 								<td>
 									<div class="btn-group">
 										<button class="btn">操作</button>
@@ -45,7 +45,7 @@
 										</button>
 										<ul class="dropdown-menu">
 											<li><a href="findByIdToReser.product?id=${p.id }">修改</a>
-												<a href="javascript:;" onclick="deleteProduct(${p.id })">删除</a></li>
+												<a href="javascript:;" onclick="deleteProduct()">删除</a></li>
 										</ul>
 										<script type="text/javascript">
 											function deleteProduct(id) {
@@ -82,11 +82,12 @@
 				<h3>添加新书籍</h3>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+				<form class="form-horizontal" action="{{url_for('web.upload_file')}}" method="post"
+					enctype="multipart/form-data">
 					<div class="control-group">
-						<label for="name" class="control-label">书名</label>
+						<label for="title" class="control-label">书名</label>
 						<div class="controls">
-							<input name="name" id="name" type="text" placeholder="请输入书名" />
+							<input name="title" id="title" type="text" placeholder="请输入书名" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -139,10 +140,10 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label for="img" class="control-label">商品图片
+						<label for="file" class="control-label">商品图片
 						</label>
 						<div class="controls">
-							<input id="img" id="img" type="file" placeholder="书籍图片" name="file" />
+							<input name="file" id="file" type="file" placeholder="书籍图片" />
 						</div>
 					</div>
 					<div class="modal-footer">

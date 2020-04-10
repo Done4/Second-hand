@@ -13,6 +13,7 @@ def is_isbn_or_key(word):
         return 'isbn'
     return 'keyword'
 
+#读取ISBN 有两种分别处理
 def get_isbn(data_dict):
     isbn = data_dict.get('isbn')
     if not isbn:

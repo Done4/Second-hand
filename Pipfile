@@ -17,6 +17,7 @@ cymysql = "*"
 flask-login = "*"
 flask-mail = "*"
 flask-migrate = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.7"

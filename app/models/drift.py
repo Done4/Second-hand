@@ -1,4 +1,4 @@
-from app.libs.enums import PendingStatus
+from app.tools.enums import PendingStatus
 from sqlalchemy import Column, String, Integer, ForeignKey, SmallInteger
 from sqlalchemy.orm import relationship
 from app.models.base import Base
@@ -9,10 +9,6 @@ class Drift(Base):
         一次具体的交易信息
     """
     __tablename__ = 'drift'
-
-    def __init__(self):
-        self.pending = PendingStatus.Waiting
-        super(Drift, self).__init__()
 
     id = Column(Integer, primary_key=True)
     #邮寄信息
@@ -25,13 +21,14 @@ class Drift(Base):
     book_title = Column(String(50))
     book_author = Column(String(200))
     book_img = Column(String(50))
+    gift_id = Column(Integer)
     #请求者信息
     requester_id = Column(Integer)
     requester_nickname = Column(String(20))
     #赠送者信息
     gifter_id = Column(Integer)
-    gift_id = Column(Integer)
     gifter_nickname = Column(String(20))
+
     #交易状态
     _pending = Column('pending', SmallInteger, default=1)
 

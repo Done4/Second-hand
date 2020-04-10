@@ -1090,3 +1090,13 @@
     overflow: visible !important;
   }
 }
+
+.span12 {
+  position: relative;
+}
+
+tbody tr td:nth-last-child(1) {
+  position: absolute;
+  right: 0px;
+
+}

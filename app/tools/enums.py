@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import Enum,unique
 
-
+#不能定义相同的成员值
+@unique
 class PendingStatus(Enum):
     """交易状态"""
     Waiting = 1
@@ -8,7 +9,7 @@ class PendingStatus(Enum):
     Reject = 3
     Redraw = 4
 
-
+    #只在类中运行而不在实例中运行
     @classmethod
     def pending_str(cls, status, key):
         key_map = {
@@ -31,8 +32,3 @@ class PendingStatus(Enum):
         }
         return key_map[status][key]
 
-
-class GiftStatus(Enum):
-    Waiting = 0
-    Success = 1
-    Redraw = 2

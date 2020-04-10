@@ -15,7 +15,7 @@
             <a href="{{ url_for('web.book_detail', isbn=wish.book.isbn) }}" class="">
                 <div style="margin-bottom:30px;" class="col-md-9 col-padding">
                     <div class="col-md-2">
-                        <img class="book-img-small shadow" src="{{ wish.book.image }}">
+                        <a href="https://search.jd.com/Search?keyword={{ wish.book.isbn }}"><img class="book-img-small shadow" src="{{ wish.book.image }}"></a>
                     </div>
                     <div style="margin-top:6px;" class="col-md-6 flex-vertical">
                             <span id="title"

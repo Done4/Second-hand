@@ -251,7 +251,7 @@ p {
 .big-title {
   display: block;
   color: #8BACA1;
-  font-size: 50px;
+  font-size: 40px;
   padding: 90px 0 70px 0;
 }
 .bg-container {
@@ -277,7 +277,7 @@ p {
 
 .form-inline .tit {
     position:absolute;
-    top: 10px;
-    left: 193px;
+    top: 25px;
+    left: 330px;
     height :60px
 }

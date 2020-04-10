@@ -1,5 +1,7 @@
 from wtforms import Form,StringField,IntegerField,BooleanField
-from wtforms.validators import Length,NumberRange,DataRequired,Regexp
+from wtforms.validators import Length,NumberRange,Regexp
+from flask_wtf.file import FileField,FileAllowed,FileRequired
+from .base import DataRequired
 #所有验证对象
 class SearchForm(Form):
     q = StringField(validators=[DataRequired(),Length(min=1,max=30)])
@@ -16,3 +18,16 @@ class DriftForm(Form):
     address = StringField(
             '邮寄地址', validators=[DataRequired(),
                                 Length(min=10, max=70, message='地址还不到10个字吗？尽量写详细一些吧')])
+
+class UploadForm(Form):
+    #file = FileField(u'上传文件',validators=[FileRequired()])
+    pages = IntegerField(validators=[NumberRange(min=1, max=99)], default=1)
+    title = StringField(validators=[DataRequired(),Length(min=1,max=30)])
+    author = StringField(validators=[DataRequired(),Length(min=1,max=30)])
+    binding = StringField(validators=[DataRequired(),Length(min=1,max=30)])
+    publisher = StringField(validators=[DataRequired(),Length(min=1,max=50)])
+    price = StringField(validators=[DataRequired(),Length(min=1,max=30)])
+    pubdate = StringField(validators=[DataRequired(),Length(min=1,max=30)])
+    isbn = StringField(validators=[DataRequired(),Length(min=1,max=15)])
+    summary = StringField(validators=[DataRequired(),Length(min=1,max=3000)])
+#18110064138 猿辅导 杨

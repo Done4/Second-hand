@@ -1,12 +1,8 @@
-from app.libs.helper import get_isbn
+from app.tools.helper import get_isbn
 
 
 class BookViewModel:
     def __init__(self, data):
-        # if not isinstance(data, dict):V
-        #     author = data.author
-        #     data = data.__dict__
-        #     data['author'] = author
         self.title = data['title']
         self.author = '、'.join(data['author'])
         self.binding = data['binding']
@@ -31,9 +27,9 @@ class BookCollection:
         self.books = []
         self.keyword = None
 
-    def fill(self, rec_book, keyword,f='mysql'):
+    def fill(self, rec_book, keyword, f='mysql'):
         self.total = rec_book.total
-        if f=='api':
+        if f == 'api':
             self.books = [BookViewModel(book) for book in rec_book.books]
         else:
             self.books=[BookViewModelSQL(book) for book in rec_book.books]
@@ -41,10 +37,6 @@ class BookCollection:
 
 class BookViewModelSQL:
     def __init__(self, data):
-        # if not isinstance(data, dict):V
-        #     author = data.author
-        #     data = data.__dict__
-        #     data['author'] = author
         self.title = data.title
         self.author = data.author
         self.binding = data.binding
@@ -52,7 +44,7 @@ class BookViewModelSQL:
         self.image = data.image
         self.price = data.price if data.price else data.price
         #self.isbn = get_isbn(data)
-        self.isbn=data.isbn
+        self.isbn = data.isbn
         self.pubdate = data.pubdate
         self.summary = data.summary
         self.pages = data.pages
